@@ -1,5 +1,6 @@
 ## optikon-api
 
+[![Build Status](https://travis-ci.org/optikon/api.svg?branch=master)](https://travis-ci.org/optikon/api)
 
 The Optikon API makes it easy to watch multiple Kubernetes clusters, and to orchestrate [Helm](https://www.helm.sh/) charts on multiple clusters.
 It was originally designed as an Edge Computing application manager, for easy monitoring and deployment across clusters.
