@@ -1,9 +1,12 @@
 #!/bin/bash
+set -e
 SHORT_SHA=`echo ${TRAVIS_COMMIT::7}`
 REPO=optikon/api
 
 make container TAG=$SHORT_SHA
 echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
+
+echo "$TRAVIS_PULL_REQUEST"
 
 # If the tag is undefined
 if [ ! -z $TRAVIS_TAG ]; then
@@ -12,7 +15,7 @@ if [ ! -z $TRAVIS_TAG ]; then
   docker push $REPO:$TRAVIS_TAG
   echo "Docker pushed ${REPO}:${TRAVIS_TAG}"
 # If the tag is set
-elif [ "$TRAVIS_BRANCH" == "master" ]; then
+elif [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   echo "Master branch"
   docker push $REPO:$SHORT_SHA
   echo "Docker pushed ${REPO}:${SHORT_SHA}"
