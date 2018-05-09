@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 SHORT_SHA=`echo ${TRAVIS_COMMIT::7}`
 REPO=optikon/api
 
